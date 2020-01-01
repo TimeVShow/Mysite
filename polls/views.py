@@ -20,14 +20,11 @@ def index(request):
 def post(request):
     time.process_time()
     if request.method == 'POST':
-        before = time.perf_counter()
         name = str(request.FILES['file'])
         form = UploadFileForm(request.POST,request.FILES)
         if form.is_valid():
             handle_uploaded_file(request.FILES['file'],name)
-            after = time.perf_counter()
-            total = after - before
-            return HttpResponse(total)
+            return HttpResponse('OK')
         else:
             form = UploadFileForm()
         return HttpResponse('OK')
